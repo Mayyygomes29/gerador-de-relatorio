@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Gráficos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            padding: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        img {
+            max-width: 100%;
+                    
+        }
+        .btn-custom {
+            border-radius: 30px;
+            padding: 10px 18px;
+            font-size: 20px;
+            border-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+    </style>
+    
+</head>
+<body>
+    
+    {% if graphs %}
+    <a href="{% url 'pdf-graph' %}" class="btn btn-info btn-custom text-white">
+                Gerar PDF 📈
+    </a>
+        {% for g in graphs %}
+            <div class="card">
+                <h2>{{ g.coluna }}</h2>
+                <img src="data:image/png;base64,{{ g.img }}">
+            </div>
+        {% endfor %}
+    {% else %}
+        <h2>Não há gráficos para ser gerado.</h2>   
+    {% endif %}         
+</body>
+</html>
