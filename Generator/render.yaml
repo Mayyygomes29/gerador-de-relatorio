@@ -3,5 +3,5 @@ services:
     name: Generator
     env: python
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "gunicorn Generator.wsgi:application"
+    startCommand: "gunicorn generator.wsgi:application"
     plan: free
