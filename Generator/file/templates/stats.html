@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        @page {
+            size: A4;
+            margin: 20mm;
+        }
+
+        body {
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 11px;
+            color: #1f2937;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 14px;
+            margin-bottom: 20px;
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2563eb;
+            margin-bottom: 10px;
+        }
+
+        .metrics {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .metric {
+            width: 50%;
+            margin-bottom: 8px;
+        }
+
+        .label {
+            font-size: 15px;
+            color: #6b7280;
+            text-transform: uppercase;
+        }
+
+        .value {
+            font-size: 15px;
+            font-weight: bold;
+        }
+
+        .error {
+            color: #b91c1c;
+            font-style: italic;
+        }
+         body {
+            background-color: #f4f6f9;
+        }
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .btn-custom {
+            border-radius: 30px;
+            padding: 10px 18px;
+            font-size: 20px;
+            border-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        table {
+            background: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Relatório de Estatísticas Descritivas</h1>
+<a href="{% url 'pdf-stats' %}" class="btn btn-info btn-custom text-white">
+                Gerar PDF 📈
+            </a>
+{% for item in estatisticas %}
+    <div class="card">
+        <div class="title">{{ item.coluna }}</div>
+
+        {% if item.stats %}
+            <div class="metrics">
+                {% for key, value in item.stats.items %}
+                    <div class="metric">
+                        <div class="label">{{ key }}</div>
+                        <div class="value">{{ value }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <div class="error">{{ item.erro }}</div>
+        {% endif %}
+    </div>
+{% endfor %}
+
+</body>
+</html>
+
